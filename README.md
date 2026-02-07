@@ -26,9 +26,9 @@ cd elective4-mt
 pip install -r requirements.txt
 ```
 or
-``bash
+```bash
 python -m pip install -r requirements.txt
-``
+```
 
 ## 📋 Requirements
 
