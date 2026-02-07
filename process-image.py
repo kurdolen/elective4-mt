@@ -2,6 +2,7 @@ from module.median_blur import apply_median_blur
 from module.grayscale import apply_grayscale
 from module.canny_edge import apply_canny_edge
 from module.emboss_filter import apply_emboss_filter
+from module.bilateral_filter import apply_bilateral_filter
 from pathlib import Path
 import os
 
@@ -41,6 +42,12 @@ def process_images():
             print(f"Emboss filter applied successfully for {filename}")
         else:
             print(f"Failed to apply emboss filter for {filename}")
+            
+        # Apply bilateral filter
+        if apply_bilateral_filter(image_path, output_folder=OUTPUT_DIR):
+            print(f"Bilateral filter applied successfully for {filename}")
+        else:
+            print(f"Failed to apply bilateral filter for {filename}")
 
 if __name__ == "__main__":
     process_images()
