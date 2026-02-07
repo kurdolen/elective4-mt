@@ -1,6 +1,7 @@
 from module.median_blur import apply_median_blur
 from module.grayscale import apply_grayscale
 from module.canny_edge import apply_canny_edge
+from module.emboss_filter import apply_emboss_filter
 from pathlib import Path
 import os
 
@@ -35,6 +36,11 @@ def process_images():
         else:
             print(f"Failed to apply Canny edge detection for {filename}")
             
+        # Apply emboss filter
+        if apply_emboss_filter(image_path, output_folder=OUTPUT_DIR):
+            print(f"Emboss filter applied successfully for {filename}")
+        else:
+            print(f"Failed to apply emboss filter for {filename}")
 
 if __name__ == "__main__":
     process_images()
