@@ -45,8 +45,7 @@ def apply_median_blur(image_path, output_folder=None, kernel_size=5):
         
         # Save the processed image
         cv2.imwrite(output_path, blurred_image)
-        print(f"Success: Median blurred image saved to {output_path}")
-        
+        print(f"Median blur applied and saved")
         return True
     
     except Exception as e:

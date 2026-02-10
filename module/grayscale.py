@@ -40,8 +40,7 @@ def apply_grayscale(image_path, output_folder=None):
         
         # Save the processed image
         cv2.imwrite(output_path, grayscale_image)
-        print(f"Success: Grayscale image saved to {output_path}")
-        
+        print(f"Grayscale conversion applied and saved")        
         return True
     
     except Exception as e:

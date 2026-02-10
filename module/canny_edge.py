@@ -45,8 +45,7 @@ def apply_canny_edge(image_path, threshold1=100, threshold2=150, output_folder=N
         
         # Save the processed image
         cv2.imwrite(output_path, edges)
-        print(f"Success: Canny edge image saved to {output_path}")
-        
+        print(f"Canny edge detection applied and saved")        
         return True
     
     except Exception as e:
