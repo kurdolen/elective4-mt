@@ -39,17 +39,19 @@ python -m pip install -r requirements.txt
 
 ```
 elective4-mt/
-├── process_image.py          # Main script to run image processing
+├── process_image.py          # Main runner that applies individual and chained filters
 ├── requirements.txt          # Python dependencies
-├── README.md                 # Project documentation
-├── input/                    # Directory for input images
-├── output/                   # Directory for processed images
-└── module/                   # Image processing modules
-    ├── bilateral_filter.py
-    ├── canny_edge.py
-    ├── emboss_filter.py
-    ├── grayscale.py
-    └── median_blur.py
+├── README.md                 # Project documentation (this file)
+├── test_real_data.py         # Simple test harness used during development
+├── input/                    # Place input images here
+├── output/                   # Processed images are written here
+└── module/                   # Image processing modules and combiners
+   ├── bilateral_filter.py
+   ├── canny_edge.py
+   ├── combine_filters.py    # Combined/sequential filter helpers
+   ├── emboss_filter.py
+   ├── grayscale.py
+   └── median_blur.py
 ```
 
 ## 🚀 How to Run
@@ -58,14 +60,22 @@ elective4-mt/
    - Place your image files in the `input/` directory
    - Supported formats: `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tiff`
 
-2. **Run the Image Processing Script**
+2. **Run the image pipeline**
 ```bash
 python process_image.py
 ```
 
 3. **Check Output**
    - Processed images will be saved in the `output/` directory
-   - Each filter creates a separate processed image
+   - The runner creates individual outputs for each filter and also combined results
+   - Typical filenames produced:
+     - `<name>_median_blur<ext>`
+     - `<name>_grayscale<ext>`
+     - `<name>_canny<ext>` (module uses `_canny`)
+     - `<name>_emboss<ext>`
+     - `<name>_bilateral<ext>`
+     - `<name>_combined<ext>` (final chained result created by `process_image.py`)
+     - `<name>_00_FiveFilters<ext>` and `<name>_00_FourFilters<ext>` (helpers in `module/combine_filters.py`)
 
 ## 📊 Filters Applied
 
