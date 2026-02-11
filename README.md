@@ -1,10 +1,43 @@
-# Elective 4 MidTerm (DevOps Application)
+# 📷 Automated Image Processing Pipeline
 
-**DevOps** application for batch image processing with multiple filters and effects.
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=flat-square&logo=opencv)
+![Pytest](https://img.shields.io/badge/Testing-Pytest-yellow?style=flat-square&logo=pytest)
 
-## Overview
+## 📌 Project Overview
+This project is a Python-based image processing automation tool designed to streamline the application of various computer vision techniques. The system monitors an `input/` directory, detects valid image files, and processes them through a pipeline of five distinct filters before saving the results to an `output/` directory.
 
-This application processes images from an input directory, applies various image processing filters, and saves the results to an output directory. Features include median blur, grayscale conversion, Canny edge detection, emboss filter, and bilateral filtering.
+This application was developed as a school assignment to demonstrate modular Python programming, file system manipulation, and image processing using OpenCV.
+
+## 🚀 Key Features
+The application automatically applies the following techniques to every image found in the input directory:
+
+1.  **Median Blur:** Reduces noise while effectively preserving edges.
+2.  **Grayscale Conversion:** Converts color images to black and white for structural analysis.
+3.  **Canny Edge Detection:** Identifies strong structural edges within the image.
+4.  **Emboss Filter:** Creates a 3D shadow effect, highlighting high-frequency details.
+5.  **Bilateral Filter:** Smoothes images while keeping edges sharp (advanced noise reduction).
+
+## 📂 Project Structure
+```text
+Project/
+├── .github/workflows       # chore: setup github actions pipeline
+├── input/                  # Place raw images here (.jpg, .png, etc.)
+├── output/                 # Processed images will appear here
+├── module/                 # Image processing modules
+│   ├── median_blur.py
+│   ├── grayscale.py
+│   ├── canny_edge.py
+│   ├── emboss_filter.py
+│   ├── bilateral_filter.py
+│   └── combine_filters.py
+├── process_image.py        # Main execution script
+├── test_process_image.py   # Unit/Integration tests (Mocked)
+├── test_e2e_process.py     # End-to-End system tests (Generated data)
+├── test_real_data.py       # Real data smoke tests (Actual input files)
+├── requirements.txt        # Project dependencies
+└── README.md               # Project documentation
+```
 
 ## 🛠️ Setup & Installation
 
@@ -29,66 +62,44 @@ or
 ```bash
 python -m pip install -r requirements.txt
 ```
+## 💻 Usage
 
-## 📋 Requirements
+1. Add Images: Place your raw images (.jpg, .png, .jpeg, .bmp, or .tiff) into the input/ folder.
+2. Run the Script: Execute the main processing script:
+   python process_image.py
+3. View Results: Check the output/ folder. You will see processed versions of your images (e.g., image_canny.jpg, image_blur.jpg).
 
-- opencv-python
-- numpy
+## 🧪 Testing Documentation
+This project includes a robust testing suite using Pytest, covering logic, system behavior, and real-world data.
 
-## 📚 Project Structure
+1. Integration Tests (Mocked)
+   File: test_process_image.py
+   Purpose: Verifies the logic (e.g., "Does it detect files?", "Does it call the filter functions?").
+   Method: Uses Mocking to skip heavy image processing.
+   Run Command:
+   python -m pytest test_process_image.py -v
 
-```
-elective4-mt/
-├── process_image.py          # Main runner that applies individual and chained filters
-├── requirements.txt          # Python dependencies
-├── README.md                 # Project documentation (this file)
-├── test_real_data.py         # Simple test harness used during development
-├── input/                    # Place input images here
-├── output/                   # Processed images are written here
-└── module/                   # Image processing modules and combiners
-   ├── bilateral_filter.py
-   ├── canny_edge.py
-   ├── combine_filters.py    # Combined/sequential filter helpers
-   ├── emboss_filter.py
-   ├── grayscale.py
-   └── median_blur.py
-```
+2. End-to-End System Tests
+   File: test_end2end_process.py
 
-## 🚀 How to Run
+3. Real Data Smoke Tests
+   File: test_real_data.py
+   Purpose: Verifies the deployment (e.g., "Does it work on MY specific images?").
+   Method: Processes actual files from your input/ folder.
+   Run Command:
+   python -m pytest test_real_data.py -s -v
 
-1. **Prepare Input Images**
-   - Place your image files in the `input/` directory
-   - Supported formats: `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tiff`
+## ⚡ Run All Tests
+To execute the entire test suite at once:
+python -m pytest -v
 
-2. **Run the image pipeline**
-```bash
-python process_image.py
-```
 
-3. **Check Output**
-   - Processed images will be saved in the `output/` directory
-   - The runner creates individual outputs for each filter and also combined results
-   - Typical filenames produced:
-     - `<name>_median_blur<ext>`
-     - `<name>_grayscale<ext>`
-     - `<name>_canny<ext>` (module uses `_canny`)
-     - `<name>_emboss<ext>`
-     - `<name>_bilateral<ext>`
-     - `<name>_combined<ext>` (final chained result created by `process_image.py`)
-     - `<name>_00_FiveFilters<ext>` and `<name>_00_FourFilters<ext>` (helpers in `module/combine_filters.py`)
+## ⚠️ Academic Integrity
+This project was developed as a school assignment.
+For Students: Please use this code for reference and learning purposes only. Do not copy the code directly to submit as your own work.
 
-## 📊 Filters Applied
-
-The application applies the following image processing techniques:
-
-- **Median Blur**: Reduces noise while preserving edges
-- **Grayscale**: Converts color images to grayscale
-- **Canny Edge Detection**: Detects edges in images
-- **Emboss Filter**: Creates an embossing effect
-- **Bilateral Filter**: Smooths images while keeping edges sharp
-
-## 📝 Notes
-
-- Ensure the `input/` and `output/` directories exist (they are created automatically if missing)
-- Processing time depends on image size and quantity
-- Check console output for processing status and any errors
+## 📝 Authors
+### Asuncion, Andrei T. - Developer
+### De Leon, John Eron R. - DevOps
+### Apolonio, Lanz Matthew B. - Automated QA Tester
+### Ponelas, Joshua Efraim O. - Presenter
