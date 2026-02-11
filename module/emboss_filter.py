@@ -49,8 +49,7 @@ def apply_emboss_filter(image_path, output_folder=None):
         
         # Save the processed image
         cv2.imwrite(output_path, embossed)
-        print(f"Success: Emboss filter image saved to {output_path}")
-        
+        print(f"Emboss filter applied and saved")    
         return True
     
     except Exception as e:

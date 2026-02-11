@@ -3,56 +3,35 @@ from module.grayscale import apply_grayscale
 from module.canny_edge import apply_canny_edge
 from module.emboss_filter import apply_emboss_filter
 from module.bilateral_filter import apply_bilateral_filter
+from module.combine_filters import apply_five_filters, apply_four_filters
+import cv2
 import os
+from pathlib import Path
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(BASE_DIR, "input")
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 
-def process_images():
+def process_image():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     for filename in os.listdir(INPUT_DIR):
         if not filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
             continue
         image_path = os.path.join(INPUT_DIR, filename)
-        print(f"Processing {image_path}...")
+        print(f"\nProcessing {filename}...")
         
-        # Apply median blur
-        if apply_median_blur(image_path, output_folder=OUTPUT_DIR):
-            print(f"Median blur applied successfully for {filename}")
-        else:
-            print(f"Failed to apply median blur for {filename}")
-        print("-" * 50)
+        # Apply filters individually
+        apply_median_blur(image_path, output_folder=OUTPUT_DIR)
+        apply_grayscale(image_path, output_folder=OUTPUT_DIR)
+        apply_canny_edge(image_path, output_folder=OUTPUT_DIR)
+        apply_emboss_filter(image_path, output_folder=OUTPUT_DIR)
+        apply_bilateral_filter(image_path, output_folder=OUTPUT_DIR)
         
-        # Apply grayscale conversion
-        if apply_grayscale(image_path, output_folder=OUTPUT_DIR):
-            print(f"Grayscale conversion applied successfully for {filename}")
-        else:
-            print(f"Failed to apply grayscale conversion for {filename}")
-        print("-" * 50)
-
-        # Apply Canny edge detection
-        if apply_canny_edge(image_path, output_folder=OUTPUT_DIR):
-            print(f"Canny edge detection applied successfully for {filename}")
-        else:
-            print(f"Failed to apply Canny edge detection for {filename}")
-        print("-" * 50)
-            
-        # Apply emboss filter
-        if apply_emboss_filter(image_path, output_folder=OUTPUT_DIR):
-            print(f"Emboss filter applied successfully for {filename}")
-        else:
-            print(f"Failed to apply emboss filter for {filename}")
-        print("-" * 50)
-            
-        # Apply bilateral filter
-        if apply_bilateral_filter(image_path, output_folder=OUTPUT_DIR):
-            print(f"Bilateral filter applied successfully for {filename}")
-        else:
-            print(f"Failed to apply bilateral filter for {filename}")
-        print("-" * 50)
+        # Apply all filters sequentially for combined result
+        apply_five_filters(image_path, OUTPUT_DIR)
+        apply_four_filters(image_path, OUTPUT_DIR)
 
 if __name__ == "__main__":
-    process_images()
+    process_image()
 

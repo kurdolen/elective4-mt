@@ -43,8 +43,7 @@ def apply_bilateral_filter(image_path, diameter=9, sigma_color=75, sigma_space=7
         
         # Save the processed image
         cv2.imwrite(output_path, filtered_image)
-        print(f"Success: Bilateral filter image saved to {output_path}")
-        
+        print(f"Bilateral filter applied and saved")        
         return True
     
     except Exception as e:
