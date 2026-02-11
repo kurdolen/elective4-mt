@@ -1,12 +1,40 @@
-name: DevOps-Check
-on: [push]
+name: DevOps-Image-Processing-Pipeline
+
+on:
+  push:
+    paths:
+      - "input/**"
+      - "module/**"
+      - "process_image.py"
+      - "requirements.txt"
+      - ".github/workflows/**"
 
 jobs:
-  test-job:
+  process-images:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Say Hello
-        run: echo "DevOps Pipeline is active for elective4-mt!"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Image Processing in Cloud
+        run: |
+          python process_image.py
+
+      - name: Commit and Push Output Images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/
+          git commit -m "CI: Auto-process images from input folder" || echo "No changes to commit"
+          git push
