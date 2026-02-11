@@ -1,0 +1,12 @@
+name: DevOps-Check
+on: [push]
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Say Hello
+        run: echo "DevOps Pipeline is active for elective4-mt!"
