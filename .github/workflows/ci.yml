@@ -1,5 +1,8 @@
 name: DevOps-Image-Processing-Pipeline
 
+permissions:
+  contents: write
+
 on:
   push:
     paths:
@@ -8,6 +11,7 @@ on:
       - "process_image.py"
       - "requirements.txt"
       - ".github/workflows/**"
+
 
 jobs:
   process-images:
